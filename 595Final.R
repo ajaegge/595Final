@@ -8,6 +8,9 @@ library("oce")
 install.packages("pracma")
 library("pracma")
 
+options(scipen = 999)
+
+
 #Import Dataset
 
 C <- copepod_2160000_compilation
@@ -29,9 +32,8 @@ C99$D <- sprintf("%02d", DD)
 C99$Date <- str_c(C99$YY,"-",C99$M,"-",C99$D)
 
 #Normalize count data
-C99$NPerVol <- sq(C99$`VALUE-per-volu`, 4)
-
-nthroot 
+C99$V <- as.numeric(C99$`VALUE-per-volu`)
+C99$NPerVol <- nthroot(C99$V, 4)
 
 
 #Write CSV
