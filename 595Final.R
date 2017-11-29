@@ -5,6 +5,9 @@ library("stringr")
 library("pastecs")
 library("oce")
 
+install.packages("pracma")
+library("pracma")
+
 #Import Dataset
 
 C <- copepod_2160000_compilation
@@ -24,3 +27,12 @@ C99$DD <- as.integer(C99$DAY)
 C99$D <- sprintf("%02d", DD)
 
 C99$Date <- str_c(C99$YY,"-",C99$M,"-",C99$D)
+
+#Normalize count data
+C99$NPerVol <- sq(C99$`VALUE-per-volu`, 4)
+
+nthroot 
+
+
+#Write CSV
+write.csv(C99, "Diatoms.csv")
