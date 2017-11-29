@@ -8,8 +8,6 @@ library("oce")
 install.packages("pracma")
 library("pracma")
 
-options(scipen = 999)
-
 
 #Import Dataset
 
@@ -35,6 +33,10 @@ C99$Date <- str_c(C99$YY,"-",C99$M,"-",C99$D)
 C99$V <- as.numeric(C99$`VALUE-per-volu`)
 C99$NPerVol <- nthroot(C99$V, 4)
 
+#Sum per sampling site
+VolSum <- aggregate(C99$NPerVol, by = list(C99$LATITUDE, C99$LONGITDE), FUN = sum)
+
 
 #Write CSV
 write.csv(C99, "Diatoms.csv")
+write.csv(VolSum, "VolSum.csv")
