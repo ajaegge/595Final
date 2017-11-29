@@ -1,3 +1,10 @@
+#Load libraries
+library("lubridate")
+library("plyr")
+library("stringr")
+library("pastecs")
+library("oce")
+
 #Import Dataset
 
 C <- copepod_2160000_compilation
@@ -8,4 +15,12 @@ C
 
 C99 <- subset(C, C$YEAR == 1999)
 
+#Date format for ArcGIS
 
+C99$YY <- as.integer(C99$YEAR)
+C99$MM <- as.integer(C99$MON)
+C99$M <- sprintf("%02d", MM)
+C99$DD <- as.integer(C99$DAY)
+C99$D <- sprintf("%02d", DD)
+
+C99$Date <- str_c(C99$YY,"-",C99$M,"-",C99$D)
